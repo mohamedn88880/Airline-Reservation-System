@@ -1,2 +1,2 @@
 # Airline-Reservation-System
-## Welcome to our project!
+## Welcome to our project
