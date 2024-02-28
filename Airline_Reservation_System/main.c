@@ -58,9 +58,17 @@ int main()
 {
     unsigned int choice;
 
+    printf(" _ _______ _______ _______    _______ _       _______ _______ _     _ _______ ______  \n");
+    printf("| (_______|_______|_______)  (_______|_)     (_______|_______|_)   (_|_______|_____ \\ \n");
+    printf("| |_____   _____   _____      _____   _ _____ _______   __    _______ _______ _____) )\n");
+    printf("| |  ___) |  ___) |  ___)    |  ___) | (_____)  ___  | / /   |  ___  |  ___  |  __  / \n");
+    printf("| | |_____| |_____| |_____   | |_____| |_____| |   | |/ /____| |   | | |   | | |  \\ \\ \n");
+    printf("|_|_______)_______)_______)  |_______)_______)_|   |_(_______)_|   |_|_|   |_|_|   |_|\n");
+
     printf("Airline Reservation System\n\n");
     printf("1. Admin settings\n");
     printf("2. Passenger settings\n");
+    printf("3. Quit");
 
     invalid:
     printf("\n");
@@ -74,6 +82,9 @@ int main()
     case 2:
         passenger_Settings();
         break;
+    case 3:
+        printf("Exiting Program...");
+        return 0;
     default:
         printf("Invalid Input!");
         goto invalid;
