@@ -45,7 +45,7 @@ int passengersExist = 0;
 void admin_Settings();
 void passenger_Settings();
 void loginSignup();
-
+void update_flight();
 //Testing Area
 
 
@@ -85,6 +85,7 @@ int main()
 //////////////////////////////////////////////////////////Functions' Code
 void admin_Settings(){
     unsigned int choice;
+    unsigned int flight_num;//number of flight which will add or update or delete (mahmoud);
 
     printf("1. Add new flight\n");
     printf("2. Delete existing flight schedule\n");
@@ -104,7 +105,9 @@ void admin_Settings(){
 
         break;
     case 3:
-
+        printf("\n\nEnter flight number to UPDATE: ");
+        scanf("%d",&flight_num);
+        update_flight(flight_num);
         break;
     case 4:
         main();
@@ -167,3 +170,44 @@ void loginSignup(){
     scanf("%d", &ID);
 
 }
+
+
+//////////////////////////////updating flight
+void update_flight(int flight_num){
+    int flag = 0;
+
+
+    for(int i = 0 ; i < flightsExist ; i++){
+        if(trip[i].flightNumber == flight_num){
+            flag = 1;
+
+            printf("Enter new departure city: ");
+            scanf("%s",&trip[i].departureCity);
+
+            printf("Enter new departure time: ");
+            scanf("%s",&trip[i].departureTime);
+
+            printf("Enter new arrival city: ");
+            scanf("%s",&trip[i].arrivalCity);
+
+            printf("Enter new arrival time: ");
+            scanf("%s",&trip[i].arrivalTime);
+
+            printf("Enter new flight date: ");
+            scanf("%s",&trip[i].flightDate);
+
+            printf("Enter new available seats: ");
+            scanf("%s",&trip[i].availableSeats);
+
+            printf("Flight schedule updated successfully!\n");
+            break;
+
+        }
+
+        }
+        if(!flag) {
+        printf("\nFlight schedule not found!\n\n");
+        admin_Settings();
+    }
+}
+
