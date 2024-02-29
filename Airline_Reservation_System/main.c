@@ -8,7 +8,7 @@ struct flight{
     int flightNumber;
     int availableSeats;
     char flightDate[20]; // DD/MM/YYYY
-    char departureTime[20]; // HH:MM
+    char departyreTime[20]; // HH:MM
     char departureCity[50];
     char arrivalTime[20]; // HH:MM
     char arrivalCity[50];
@@ -110,7 +110,9 @@ void admin_Settings(){
 
     switch (choice) {
     case 1:
-
+        printf("Enter The Flight Exist To The System\n");
+        scanf("%i",&flightsExist);
+        New_Flight_Schedule(trip[MAX_FLIGHTS]);
         break;
     case 2:
 
@@ -181,7 +183,45 @@ void loginSignup(){
     scanf("%d", &ID);
 
 }
+//////////////////////////////New Flight Schedule
+void New_Flight_Schedule(flight New_Flight)
+{
+    static int Numbers=0;
+    Numbers=flightsExist;
+    
+    if(flightsExist<=MaxFlight)
+    {
+         printf("Enter The Flight Number:   \n");
+         scanf("%i",&New_Flight.flightNumber  );
 
+         printf("Enter The Number of Seats: \n");
+         scanf("%i",&New_Flight.vailableSeats);
+         fflush(stdin);
+
+         printf("Enter The Flight Date:     \n");
+         gets(New_Flight.flightDate[20]         );
+
+         printf("Enter The Departure_city:  \n");
+         gets(New_Flight.departureCity[50]     );
+
+         printf("Enter The Departure_Time   \n");
+         gets(New_Flight.departyreTime[20]     );
+
+         printf("Enter The Arrival_city     \n");
+         gets(New_Flight.arrivalCity[50]       );
+        
+         printf("Enter The Arrival_Time     \n");
+         gets(New_Flight.arrivalTime[20]       );
+         fflush(stdin);
+        
+         Numbers++;
+         printf("You Add New Flight Schedule Successfully...\n");
+    }
+    else
+    {
+        printf("Sorry, You can't Add Anew_Flight. The System Is Full !!!\n");
+    }
+}
 
 //////////////////////////////updating flight
 void update_flight(int flight_num){
