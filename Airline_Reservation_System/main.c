@@ -37,6 +37,7 @@ struct passenger pasngr[MAX_PASSENGERS];
 struct ticket tkt[MAX_PASSENGERS];
 int flightsExist = 0;
 int passengersExist = 0;
+int TicketExist = 0;
 
 
 
@@ -47,6 +48,7 @@ void passenger_Settings();
 void loginSignup();
 int New_Flight_Schedule(void);
 void update_flight();
+int New_Passenger_Resservation(void);
 //Testing Area
 
 
@@ -111,7 +113,7 @@ void admin_Settings(){
 
     switch (choice) {
     case 1:
-        printf("Enter The Flight Exist To The System\n");
+        printf("Enter The Flights Exist To The System\n");
         scanf("%i",&flightsExist);
         flightsExist=New_Flight_Schedule();
         break;
@@ -189,29 +191,29 @@ void loginSignup(){
 int New_Flight_Schedule(void)
 {
     int Numbers=flightsExist;
-    if(flightsExist<=MaxFlight)
+    if(flightsExist<MaxFlight)
     {
-         printf("Enter The Flight Number:              \n");
-         scanf("%i",&flight[flightsExist+1]. flightNumber );
+         printf("Enter The Flight Number:  \n");
+         scanf("%i",&trip[flightsExist+1]. flightNumber );
 
-         printf("Enter The Number of Seats:            \n");
-         scanf("%i",&flight[flightsExist+1].availableSeats);
+         printf("Enter The Number of Seats:\n");
+         scanf("%i",&trip[flightsExist+1].availableSeats);
          fflush(stdin);
 
-         printf("Enter The Flight Date:                \n");
-         gets(flight[flightsExist+1].lightDate            );
+         printf("Enter The Flight Date:   \n");
+         gets(trip[flightsExist+1].flightDate           );
 
-         printf("Enter The Departure_city:             \n");
-         gets(flight[flightsExist+1].departureCity        );
+         printf("Enter The Departure_city:\n");
+         gets(trip[flightsExist+1].departureCity        );
 
-         printf("Enter The Departure_Time              \n");
-         gets(flight[flightsExist+1].departureTime        );
+         printf("Enter The Departure_Time:\n");
+         gets(trip[flightsExist+1].departureTime        );
 
-         printf("Enter The Arrival_city               \n");
-         gets(flight[flightsExist+1].arrivalCity         );
+         printf("Enter The Arrival_city:  \n");
+         gets(trip[flightsExist+1].arrivalCity          );
 
-         printf("Enter The Arrival_Time     \n");
-         gets(flight[flightsExist+1].arrivalTime         );
+         printf("Enter The Arrival_Time:  \n");
+         gets(trip[flightsExist+1].arrivalTime         );
          fflush(stdin);
          printf("You Add New Flight Schedule Successfully...\n");
          Numbers++;
@@ -260,4 +262,60 @@ void update_flight(int flight_num){
         admin_Settings();
     }
 }
+///////////////////////////////////Add New Reservation
+int New_Passenger_Resservation(void)
+{
+    int Erorr_State=0;
+    int Numbers=passengersExist;
+    char Departure_City[20];
+    char Arrival_City  [20];
+    int count;
+        fflush(stdin);
+
+        printf("Enter Your Name:           \n");
+        gets(pasngr[passengersExist+1].Name               );
+
+
+        printf("Enter your Adress:         \n");
+        gets(pasngr[passengersExist+1].Adress             );
+
+        printf("Enter you IDE:             \n");
+        scanf("%i",&pasngrr[passengersExist+1].ID );
+    
+        fflush(stdin);
+        printf("Enter Your Phone Number:   \n");
+        scanf("% i",&pasngr[passengersExist+1].phoneNumber);
+
+        Invalid :
+        fflush(stdin);
+        printf("Enter The Departure City:  \n");
+        gets(Departure_City);
+        printf("Enter The Arrival City :   \n");
+        gets(Arrival_City  );
+        for(count=0;count<flightsExist;count++)
+        {
+            if((trip[count].departureCity==Departure_City)&&(trip[count].arrivalCity==Arrival_City))
+            {
+                if(passengersExist<MaxPassenger)
+                {
+                    Erorr_State=1;
+                    printf("There is avalible Ticket For you                                  \n");
+                    printf("The Number of Your Flight is =%i         \n",trip[count].flightNumber);
+                    printf("The Number of Your Ticket is =%i\n",tkt[TicketExist+1].number        );
+                    printf("Enter The Date of your Reservation:                               \n");
+                    gets(tkt[Ticket_Exist+1].resDate                                             );
+                    TicketExist++;
+                    break;
+                }
+            }
+
+        }
+        if(Erorr_State==0)
+        {
+            printf("Sorry,There Is Not Avalible Reservation for This Place!!!\n ");
+            goto Invalid;
+        }
+    return(Numbers);
+}
+
 
