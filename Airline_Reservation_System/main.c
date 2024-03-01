@@ -82,6 +82,7 @@ void admin_Settings(){
     case 3:
         printf("\n\nEnter flight number to UPDATE: ");
         scanf("%d",&flight_num);
+        update_flight();
         break;
     case 4:
         main();
@@ -140,7 +141,7 @@ void passenger_Settings(){
 
         break;
     case 5:
-
+        modify_reservation();
         break;
     case 6:
 
@@ -221,7 +222,6 @@ int loginSignup(){
             goto invalid;
     }
 };
-////////////////////////////////////////////////////////////////////////////update flight
 void update_flight(int flight_num){
     int flag = 0;
     int choice,confirm;
@@ -378,17 +378,17 @@ void update_flight(int flight_num){
         }
 
 
-
-    }
-     if(!flag) {
+        if(!flag) {
         printf("\nFlight schedule not found!\n\n");
         admin_Settings();
+    }
     }
 
 
 
 }
-///////////////////////modify reservation
+////////////////////////////////////////////////////////////////////////////
+//modify reservation
 void modify_reservation(){
     unsigned int flag = 0,choice,confirm ,ticket_num;
     char check[100];
@@ -508,6 +508,9 @@ void modify_reservation(){
                     goto all;
                 }
 
+
+
+
             case 6:
                 printf("\nEnter new passenger name: ");
                 scanf("%s",&pasngr[i].Name);
@@ -532,16 +535,15 @@ void modify_reservation(){
             }
 
         }
-
-            }
-
-    if(!flag){
+        if(!flag){
                 printf("\nReservation not exist!\n\n");
 
                 passenger_Settings();
+            }
+    }
 
 }
-}
+
 //////////////////////////////Add New flight
 int New_Flight_Schedule(void)
 {
