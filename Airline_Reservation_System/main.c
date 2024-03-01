@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
+
 #define MAX_FLIGHTS 100
 #define MAX_PASSENGERS 100
 
@@ -28,11 +30,11 @@ struct ticket{
     int passengerID;
     int flightNumber;
     char resDate[20]; // DD/MM/YYYY
+    ///??????????????????????????
     char departure_city[20];
     char departure_time[20];
     char arrival_city[20];
     char arrival_time[20];
-
 
 };
 
@@ -50,11 +52,12 @@ int TicketExist = 0;
 //Prototype Functions
 void admin_Settings();
 void passenger_Settings();
-void loginSignup();
+int loginSignup();
 int New_Flight_Schedule(void);
 void update_flight();
 int New_Passenger_Resservation(void);
 void modify_reservation();
+
 //Testing Area
 
 
@@ -81,9 +84,12 @@ int main()
 
     invalid:
     printf("\n");
-    printf("Enter a Number: ");
+    printf("Enter a your choice: ");
+
     if (scanf("%d", &choice) != 1){
         printf("Invalid Input!");
+        scanf("%*[^\n]");
+        goto invalid;
     }
 
     switch (choice) {
@@ -117,7 +123,11 @@ void admin_Settings(){
     invalid:
     printf("\n");
     printf("Enter a Number: ");
-    scanf("%d", &choice);
+    if (scanf("%d", &choice) != 1){
+        printf("Invalid Input!");
+        scanf("%*[^\n]");
+        goto invalid;
+    }
 
     switch (choice) {
     case 1:
@@ -145,6 +155,11 @@ void admin_Settings(){
 
 void passenger_Settings(){
     unsigned int choice;
+    int passengerID = 0;
+    bool loggedin = false; // true for testing //////////////////////////////////////////////////////////////
+    begin:
+    printf("You're ");
+    printf(loggedin ? "logged in (ID:%d)\n":"not logged in.\n", passengerID);
 
     printf("1. Login / Sign up\n");
     printf("2. Search Available Flights\n");
@@ -157,11 +172,21 @@ void passenger_Settings(){
     invalid:
     printf("\n");
     printf("Enter a Number: ");
-    scanf("%d", &choice);
+    if (scanf("%d", &choice) != 1){
+        printf("Invalid Input!");
+        scanf("%*[^\n]");
+        goto invalid;
+    } else if (!loggedin && choice != 1 && choice != 7){
+        printf("Please login the system first!");
+        goto invalid;
+    }
 
     switch (choice) {
     case 1:
-
+        passengerID = loginSignup();
+        loggedin = passengerID;
+        printf("%d \n", loggedin);
+        goto begin;
         break;
     case 2:
 
@@ -188,18 +213,79 @@ void passenger_Settings(){
 
 }
 
-void loginSignup(){
-    unsigned int ID;
-    printf("Enter your ID: ");
-    scanf("%d", &ID);
+int loginSignup(){
+    unsigned int choice;
+    unsigned int ID = 0;
 
-}
+    printf("1. Login\n");
+    printf("2. Signup\n");
+    printf("3. Back\n");
+
+    invalid:
+    printf("Enter your choice: ");
+    if (scanf("%d", &choice) != 1){
+        printf("Invalid Input!\n");
+        scanf("%*[^\n]");
+        goto invalid;
+    }
+
+    reenter:
+    switch (choice) {
+        case 1: // Login
+            printf("Note: enter '0' to go back.\n");
+            printf("Enter the ID number: ");
+            if (scanf("%d", &ID) != 1){
+                printf("Invalid Input!\n");
+                scanf("%*[^\n]");
+                goto reenter;
+            }else if(ID == 0){goto invalid;}
+
+            for (int i = 0;i <= MAX_PASSENGERS;i++){ //searching
+                if(pasngr[i].ID == ID){
+                    printf("Logged in successfully!");
+                   return ID;
+                }
+            }
+            ID = 0;
+            if(!ID){
+                printf("Your ID isn't found.\nPlease, reenter your ID or signup.\n");
+                goto reenter;
+            }
+
+            break;
+        case 2: // Signup
+            printf("Note: enter '0' to go back.\n");
+            printf("Enter the ID number: ");
+            if (scanf("%d", &ID) != 1){
+                printf("Invalid Input!\n");
+                scanf("%*[^\n]");
+                goto reenter;
+            }else if(ID == 0){goto invalid;}
+
+            for (int i = 0;i <= MAX_PASSENGERS;i++){ //searching
+                if(pasngr[i].ID == ID){
+                   printf("Your account already exists. Please, enter an absent ID.\n");
+                   goto reenter;
+                }
+            }
+            pasngr[passengersExist++].ID = ID;
+            printf("Your account is created successfully!\n");
+            return ID;
+        case 3: // Back
+            passenger_Settings();
+            break;
+        default:
+            printf("Invalid Input!\n");
+            goto invalid;
+    }
+};
+
 
 //////////////////////////////Add New flight
 int New_Flight_Schedule(void)
 {
     int Numbers=flightsExist;
-    if(flightsExist<MaxFlight)
+    if(flightsExist<MAX_FLIGHTS)
     {
          printf("Enter The Flight Number:  \n");
          scanf("%i",&trip[flightsExist+1]. flightNumber );
@@ -413,11 +499,11 @@ int New_Passenger_Resservation(void)
 
 
         printf("Enter your Adress:         \n");
-        gets(pasngr[passengersExist+1].Adress             );
+        gets(pasngr[passengersExist+1].Address             );
 
         printf("Enter you IDE:             \n");
-        scanf("%i",&pasngrr[passengersExist+1].ID );
-    
+        scanf("%i",&pasngr[passengersExist+1].ID );
+
         fflush(stdin);
         printf("Enter Your Phone Number:   \n");
         scanf("% i",&pasngr[passengersExist+1].phoneNumber);
@@ -432,14 +518,14 @@ int New_Passenger_Resservation(void)
         {
             if((trip[count].departureCity==Departure_City)&&(trip[count].arrivalCity==Arrival_City))
             {
-                if(passengersExist<MaxPassenger)
+                if(passengersExist<MAX_PASSENGERS)
                 {
                     Erorr_State=1;
                     printf("There is avalible Ticket For you                                  \n");
                     printf("The Number of Your Flight is =%i         \n",trip[count].flightNumber);
                     printf("The Number of Your Ticket is =%i\n",tkt[TicketExist+1].number        );
                     printf("Enter The Date of your Reservation:                               \n");
-                    gets(tkt[Ticket_Exist+1].resDate                                             );
+                    gets(tkt[TicketExist+1].resDate                                             );
                     TicketExist++;
                     break;
                 }
