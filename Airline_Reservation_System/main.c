@@ -135,7 +135,7 @@ void passenger_Settings(){
 
         break;
     case 3:
-        passengersExist=New_Passenger_Resservation();
+        New_Passenger_Resservation();
         break;
     case 4:
 
@@ -549,9 +549,8 @@ void modify_reservation(){
 int New_Flight_Schedule(void)
 {
     int Numbers=flightsExist;
-    printf("Enter The Flights Exist To The System\n");
-    scanf("%i",&flightsExist);
-    if((flightsExist<MAX_FLIGHTS)&&(flightsExist>0))
+  
+    if((flightsExist+1)<MAX_FLIGHTS)
     {
          int choice=0;
          printf("Enter The Flight Number:  \n");
