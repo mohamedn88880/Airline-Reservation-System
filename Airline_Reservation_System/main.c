@@ -74,7 +74,7 @@ void admin_Settings(){
 
     switch (choice) {
     case 1:
-        flightsExist=New_Flight_Schedule();
+        New_Flight_Schedule();
         break;
     case 2:
 
@@ -82,7 +82,7 @@ void admin_Settings(){
     case 3:
         printf("\n\nEnter flight number to UPDATE: ");
         scanf("%d",&flight_num);
-        update_flight();
+        update_flight(flight_num);
         break;
     case 4:
         main();
@@ -249,7 +249,7 @@ void update_flight(int flight_num){
             case 1:
 
                 printf("Enter new departure city: ");
-                scanf("%s", check);
+                scanf("%s",& check);
                 printf("1. confirm\n");
                 printf("2. back\n");
                 printf("\nEnter your choice: ");
@@ -271,7 +271,7 @@ void update_flight(int flight_num){
 
             case 2:
                 printf("Enter new departure time: ");
-                scanf("%s", check);
+                scanf("%s",& check);
                 printf("1. confirm\n");
                 printf("2. back\n");
                 printf("\nEnter your choice: ");
@@ -292,7 +292,7 @@ void update_flight(int flight_num){
 
             case 3:
                 printf("Enter new arrival city: ");
-                scanf("%s", check);
+                scanf("%s",& check);
                 printf("1. confirm\n");
                 printf("2. back\n");
                 printf("\nEnter your choice: ");
@@ -311,7 +311,7 @@ void update_flight(int flight_num){
 
             case 4:
                 printf("Enter new arrival time: ");
-                scanf("%s", check);
+                scanf("%s",& check);
                 printf("1. confirm\n");
                 printf("2. back\n");
                 printf("\nEnter your choice: ");
@@ -331,7 +331,7 @@ void update_flight(int flight_num){
 
             case 5:
                 printf("Enter new flight date: ");
-                scanf("%s", check);
+                scanf("%s",& check);
                 printf("1. confirm\n");
                 printf("2. back\n");
                 printf("\nEnter your choice: ");
@@ -350,19 +350,18 @@ void update_flight(int flight_num){
 
             case 6:
                 printf("\n\nEnter new departure city: ");
-            scanf("%s",trip[i].departureCity);
+            scanf("%s",&trip[i].departureCity);
 
             printf("Enter new departure time: ");
-            scanf("%s",trip[i].departureTime);
-
+            scanf("%s",&trip[i].departureTime);
             printf("Enter new arrival city: ");
-            scanf("%s",trip[i].arrivalCity);
+            scanf("%s",&trip[i].arrivalCity);
 
             printf("Enter new arrival time: ");
-            scanf("%s",trip[i].arrivalTime);
+            scanf("%s",&trip[i].arrivalTime);
 
             printf("Enter new flight date: ");
-            scanf("%s",trip[i].flightDate);
+            scanf("%s",&trip[i].flightDate);
 
             printf("\n\n***Flight schedule updated successfully!***\n\n");
             goto all;
@@ -547,38 +546,38 @@ void modify_reservation(){
 }
 
 //////////////////////////////Add New flight
-int New_Flight_Schedule(void)
+void New_Flight_Schedule(void)
 {
     int Numbers=flightsExist;
-  
-    if((flightsExist+1)<MAX_FLIGHTS)
+
+    if((flightsExist)<MAX_FLIGHTS)
     {
          int choice=0;
          printf("Enter The Flight Number:  \n");
-         scanf("%i",&trip[flightsExist+1]. flightNumber );
+         scanf("%i",&trip[flightsExist]. flightNumber );
 
          printf("Enter The Number of Seats:\n");
-         scanf("%i",&trip[flightsExist+1].availableSeats);
+         scanf("%i",&trip[flightsExist].availableSeats);
          fflush(stdin);
 
          printf("Enter The Flight Date:   \n");
-         gets(trip[flightsExist+1].flightDate           );
+         gets(trip[flightsExist].flightDate           );
 
          printf("Enter The Departure_city:\n");
-         gets(trip[flightsExist+1].departureCity        );
+         gets(trip[flightsExist].departureCity        );
 
          printf("Enter The Departure_Time:\n");
-         gets(trip[flightsExist+1].departureTime        );
+         gets(trip[flightsExist].departureTime        );
 
          printf("Enter The Arrival_city:  \n");
-         gets(trip[flightsExist+1].arrivalCity          );
+         gets(trip[flightsExist].arrivalCity          );
 
          printf("Enter The Arrival_Time:  \n");
-         gets(trip[flightsExist+1].arrivalTime         );
+         gets(trip[flightsExist].arrivalTime         );
          fflush(stdin);
          printf("\n...You Add New Flight Schedule Successfully...\n");
          Numbers++;
-
+         flightsExist++;
          printf("\n(1) To Go To Admin Setting\n");
          printf("(2) To Quit                 \n");
          scanf("%i",&choice);
@@ -608,7 +607,7 @@ int New_Flight_Schedule(void)
         }
 
     }
-    return(Numbers);
+
 }
 
 int New_Passenger_Resservation(void)
