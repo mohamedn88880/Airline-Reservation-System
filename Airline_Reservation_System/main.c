@@ -6,13 +6,13 @@
 //Testing Area
 
 
-
 //Testing Area
 
 /////////////////////////////////////////////////////////Functions' Code
 
 int main()
 {
+    trip[0].flightNumber = 12;  //test
     unsigned int choice;
 
     printf(" _ _______ _______ _______    _______ _       _______ _______ _     _ _______ ______  \n");
@@ -74,7 +74,7 @@ void admin_Settings(){
 
     switch (choice) {
     case 1:
-     flightsExist=New_Flight_Schedule();
+        flightsExist=New_Flight_Schedule();
         break;
     case 2:
 
@@ -82,6 +82,7 @@ void admin_Settings(){
     case 3:
         printf("\n\nEnter flight number to UPDATE: ");
         scanf("%d",&flight_num);
+        update_flight();
         break;
     case 4:
         main();
@@ -118,7 +119,7 @@ void passenger_Settings(){
         scanf("%*[^\n]");
         goto invalid;
     } else if (!loggedin && choice != 1 && choice != 7){
-        printf("Please login the system first!");
+        printf("Please login the system first!\n");
         goto invalid;
     }
 
@@ -140,7 +141,7 @@ void passenger_Settings(){
 
         break;
     case 5:
-
+        modify_reservation();
         break;
     case 6:
 
@@ -165,6 +166,7 @@ int loginSignup(){
 
     invalid:
     printf("Enter your choice: ");
+
     if (scanf("%d", &choice) != 1){
         printf("Invalid Input!\n");
         scanf("%*[^\n]");
@@ -176,6 +178,7 @@ int loginSignup(){
         case 1: // Login
             printf("Note: enter '0' to go back.\n");
             printf("Enter the ID number: ");
+
             if (scanf("%d", &ID) != 1){
                 printf("Invalid Input!\n");
                 scanf("%*[^\n]");
@@ -247,7 +250,7 @@ void update_flight(int flight_num){
             case 1:
 
                 printf("Enter new departure city: ");
-                scanf("%s",& check);
+                scanf("%s", check);
                 printf("1. confirm\n");
                 printf("2. back\n");
                 printf("\nEnter your choice: ");
@@ -269,7 +272,7 @@ void update_flight(int flight_num){
 
             case 2:
                 printf("Enter new departure time: ");
-                scanf("%s",& check);
+                scanf("%s", check);
                 printf("1. confirm\n");
                 printf("2. back\n");
                 printf("\nEnter your choice: ");
@@ -290,7 +293,7 @@ void update_flight(int flight_num){
 
             case 3:
                 printf("Enter new arrival city: ");
-                scanf("%s",& check);
+                scanf("%s", check);
                 printf("1. confirm\n");
                 printf("2. back\n");
                 printf("\nEnter your choice: ");
@@ -309,7 +312,7 @@ void update_flight(int flight_num){
 
             case 4:
                 printf("Enter new arrival time: ");
-                scanf("%s",& check);
+                scanf("%s", check);
                 printf("1. confirm\n");
                 printf("2. back\n");
                 printf("\nEnter your choice: ");
@@ -329,7 +332,7 @@ void update_flight(int flight_num){
 
             case 5:
                 printf("Enter new flight date: ");
-                scanf("%s",& check);
+                scanf("%s", check);
                 printf("1. confirm\n");
                 printf("2. back\n");
                 printf("\nEnter your choice: ");
@@ -348,19 +351,19 @@ void update_flight(int flight_num){
 
             case 6:
                 printf("\n\nEnter new departure city: ");
-            scanf("%s",&trip[i].departureCity);
+            scanf("%s",trip[i].departureCity);
 
             printf("Enter new departure time: ");
-            scanf("%s",&trip[i].departureTime);
+            scanf("%s",trip[i].departureTime);
 
             printf("Enter new arrival city: ");
-            scanf("%s",&trip[i].arrivalCity);
+            scanf("%s",trip[i].arrivalCity);
 
             printf("Enter new arrival time: ");
-            scanf("%s",&trip[i].arrivalTime);
+            scanf("%s",trip[i].arrivalTime);
 
             printf("Enter new flight date: ");
-            scanf("%s",&trip[i].flightDate);
+            scanf("%s",trip[i].flightDate);
 
             printf("\n\n***Flight schedule updated successfully!***\n\n");
             goto all;
