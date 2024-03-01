@@ -74,7 +74,7 @@ void admin_Settings(){
 
     switch (choice) {
     case 1:
-
+     flightsExist=New_Flight_Schedule();
         break;
     case 2:
 
@@ -134,7 +134,7 @@ void passenger_Settings(){
 
         break;
     case 3:
-
+        passengersExist=New_Passenger_Resservation();
         break;
     case 4:
 
@@ -541,4 +541,172 @@ void modify_reservation(){
                 passenger_Settings();
 
 }
+}
+//////////////////////////////Add New flight
+int New_Flight_Schedule(void)
+{
+    int Numbers=flightsExist;
+    printf("Enter The Flights Exist To The System\n");
+    scanf("%i",&flightsExist);
+    if((flightsExist<MAX_FLIGHTS)&&(flightsExist>0))
+    {
+         int choice=0;
+         printf("Enter The Flight Number:  \n");
+         scanf("%i",&trip[flightsExist+1]. flightNumber );
+
+         printf("Enter The Number of Seats:\n");
+         scanf("%i",&trip[flightsExist+1].availableSeats);
+         fflush(stdin);
+
+         printf("Enter The Flight Date:   \n");
+         gets(trip[flightsExist+1].flightDate           );
+
+         printf("Enter The Departure_city:\n");
+         gets(trip[flightsExist+1].departureCity        );
+
+         printf("Enter The Departure_Time:\n");
+         gets(trip[flightsExist+1].departureTime        );
+
+         printf("Enter The Arrival_city:  \n");
+         gets(trip[flightsExist+1].arrivalCity          );
+
+         printf("Enter The Arrival_Time:  \n");
+         gets(trip[flightsExist+1].arrivalTime         );
+         fflush(stdin);
+         printf("\n...You Add New Flight Schedule Successfully...\n");
+         Numbers++;
+
+         printf("\n(1) To Go To Admin Setting\n");
+         printf("(2) To Quit                 \n");
+         scanf("%i",&choice);
+         switch(choice)
+         {
+               case 1 :
+                  admin_Settings();
+               case 2 :
+                   return (0)   ;
+         }
+    }
+    else
+    {
+        int choice=0;
+        printf("\nSorry, You can't Add Anew_Flight. The System Is Full !!!\n");
+
+        printf("\n(1) to Admin Setting\n");
+        printf("(2) to Quit           \n");
+        scanf("%i",&choice);
+        switch(choice)
+        {
+            case 1 :
+                 admin_Settings();
+                 break;
+            case 2 :
+                return(0);
+        }
+
+    }
+    return(Numbers);
+}
+
+int New_Passenger_Resservation(void)
+{
+    int Erorr_State=0;
+    int Numbers=passengersExist;
+    int ID;
+    char Name[20];
+    char Address[100];
+    char phoneNumber[20];
+    char Departure_City[20];
+    char Arrival_City  [20];
+    char Travilling_Date[50];
+    int count;
+        fflush(stdin  );
+
+        printf("Enter Your Name:        \n");
+        gets(Name     );
+
+
+        printf("Enter your Adress:      \n");
+        gets(Address  );
+
+        printf("Enter you IDE:          \n");
+        scanf("%i",&ID);
+
+        fflush(stdin  );
+        printf("Enter Your Phone Number:\n");
+        scanf("%c",&phoneNumber);
+
+        Invalid :
+        fflush(stdin);
+        printf("Enter The Departure City:  \n");
+        gets(Departure_City);
+        printf("Enter The Arrival City :   \n");
+        gets(Arrival_City  );
+        printf("Enter The Date for Travel: \n");
+        gets(Travilling_Date);
+        for(count=0;count<flightsExist;count++)
+        {
+            if((trip[count].departureCity==Departure_City)&&
+               (trip[count].arrivalCity  ==Arrival_City  )&&
+               (trip[count].flightDate   ==Travilling_Date))
+            {
+                      if(passengersExist<MAX_PASSENGERS)
+                {
+                    int choice = 0;
+                    Erorr_State=1;
+
+                    strcpy(pasngr[passengersExist+1].Name       ,Name                     );
+                    strcpy(pasngr[passengersExist+1].ID         ,ID                       );
+                    strcpy(pasngr[passengersExist+1].Address    ,Address                  );
+                    strcpy(pasngr[passengersExist+1].phoneNumber,phoneNumber              );
+
+
+                    printf("There is Avalible Ticket For you                                  \n");
+                    printf("\nThe Number of Your Flight is = %i      \n",trip[count].flightNumber);
+                    printf("The Number of Your Ticket is = %i\n",tkt[TicketExist+1].number       );
+                    printf("The Date For Your flight is = %c\n",trip[count].flightDate           );
+                    printf("The Departure City is = %c      \n ",trip[count].departureCity       );
+                    printf("The Arrival City is = %c        \n",trip[count].arrivalCity          );
+                    printf("The Departure Time is = %c      \n",trip[count].departureTime        );
+                    printf("The Arrival Time is = %c        \n",trip[count].arrivalTime          );
+                    printf("Enter The Date of your Reservation:                               \n");
+                    gets(tkt[TicketExist+1].resDate                                              );
+
+                    printf("\n****Your Reservation is Accepted !!****1\n");
+                    TicketExist++;
+                    Numbers++;
+
+                    printf("\n(1) To Passenger Seeting\n");
+                    printf("(2) To Quit             \n");
+                    scanf("%i",choice);
+
+                    switch(choice)
+                    {
+                        case 1 :
+                              passenger_Settings();
+                        case 2 :
+                              return (0);
+                    }
+                    break;
+                }
+
+            }
+        }
+        if(Erorr_State==0)
+        {
+            int choice=0;
+            printf("\nSorry,There Is Not Avalible Reservation for This Place!!!\n");
+            printf("\n(1) To Try Again\n");
+            printf("(2) To Quit     \n");
+            scanf("%i",&choice);
+            switch(choice)
+            {
+                case 1 :
+                     goto Invalid;
+                     break;
+                case 2 :
+                    return (0);
+            }
+        }
+    return(Numbers);
 }
