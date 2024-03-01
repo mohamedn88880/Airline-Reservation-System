@@ -46,5 +46,6 @@ int TicketExist = 0;
 void admin_Settings();
 void passenger_Settings();
 int loginSignup();
-
+void modify_reservation();
+void update_flight();
 #endif // _PROJECTHEADER
