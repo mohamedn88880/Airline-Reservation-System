@@ -46,6 +46,8 @@ int TicketExist = 0;
 void admin_Settings();
 void passenger_Settings();
 int loginSignup();
+int New_Flight_Schedule(void);
+int New_Passenger_Resservation(void);
 void modify_reservation();
 void update_flight();
 #endif // _PROJECTHEADER
