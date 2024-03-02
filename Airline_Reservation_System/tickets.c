@@ -262,12 +262,13 @@ void modify_reservation(void){
             }
 
         }
-        if(!flag){
+        
+    }
+    if(!flag){
                 printf("\nReservation not exist!\n\n");
 
                 passenger_Settings();
             }
-    }
 
 }
 
