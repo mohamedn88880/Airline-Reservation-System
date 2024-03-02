@@ -231,6 +231,78 @@ void New_Flight_Schedule(void)
 
     }
 }
+////////////////////////////////////////////////////////////////////// Search Available Flights
+
+void Search_Available_Flights () {
+    all:
+        char DepartureCity[50], ArrivalCity[50], FlightDate[20] ;
+     printf("Enter The Departure city:\n");
+     gets(DepartureCity) ;
+
+     printf("Enter The Arrival city:  \n");
+     gets(ArrivalCity) ;
+
+     printf("Enter The Flight Date:\n");
+     gets(FlightDate) ;
+
+
+    int flag = 0, choice ;
+
+    for(int i = 0 ; i < flightsExist ; i++){
+
+        if(trip[i].departureCity == DepartureCity && trip[i].arrivalCity == ArrivalCity &&
+            trip[i].flightDate == FlightDate){
+            flag ++ ;
+            printf("Available") ;
+            printf("\nDeparture time: ", trip[i].departureTime);
+            printf("\nArrival time: ", trip[i].arrivalTime);
+
+        }
+
+    }
+
+       if(flag != 0){
+
+            printf("1. Add new reservation\n");
+            printf("2. Search for other flight\n")
+            printf("3. back\n");
+            printf("\nEnter your choice: ");
+
+            scanf("%d", &choice);
+
+            switch (choice){
+            case 1 :
+                New_Passenger_Resservation() ;
+
+            case 2 :
+                goto all ;
+
+            case 3 :
+                passenger_Settings() ;
+            }
+       }
+
+        else {
+            printf("Unavailable\n") ;
+            printf("1. Search for other flight\n")
+            printf("2. back\n");
+            printf("\nEnter your choice: ");
+
+            scanf("%d", &choice);
+
+            switch (choice){
+            case 1 :
+                goto all ;
+
+            case 2 :
+                passenger_Settings() ;
+            }
+        }
+
+}
+
+
+
 
 //////////////display flights
 void display_Flights() {
