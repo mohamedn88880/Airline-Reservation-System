@@ -219,4 +219,3 @@ int loginSignup(void){
             goto invalid;
     }
 }
-
