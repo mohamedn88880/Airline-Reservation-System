@@ -48,3 +48,4 @@ void New_Flight_Schedule(void);
 void New_Passenger_Resservation(void);
 void modify_reservation(void);
 void update_flight(int flight_num);
+void display_Flights();
