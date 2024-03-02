@@ -276,4 +276,39 @@ void modify_reservation(void){
             }
 
 }
+////////////////////////////////////////////////////////////////////// Show reservation log
+
+void Show_Reservation_Log(){
+    int flag = 0, choice ;
+    for(int i = 0; i < TicketExist; i++){
+        if(tkt[i].passengerID == passengerID )
+            flag++ ;
+    }
+
+    if(flag != 0){
+        printf("\nYour Flight Schedules:\n");
+    printf("------------------------------------------------------------------------------------------------------------------------\n");
+    printf("| Flight Number | departure city           | Departure Time   | arrival city      | arrival time  | available seats    \n");
+    printf("------------------------------------------------------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < TicketExist ; i++) {
+            if(tkt[i].passengerID == passengerID ){
+        printf("| %d             | %s               |           %s   |             %s|             %s|             %d|            %s|\n", trip[i].flightNumber, trip[i].departureCity, trip[i].departureTime, trip[i].arrivalCity, trip[i].arrivalTime, trip[i].availableSeats ,trip[i].flightDate);
+       }
+    }
+
+    printf("------------------------------------------------------------------------------------------------------------------------\n");
+
+    }
+
+    else{
+        printf("THERE IS NO RESERVATION")
+    }
+
+    printf("1. back\n");
+    printf("\nEnter your choice: ");
+    scanf("%d", &choice);
+     passenger_Settings() ;
+}
+
 
