@@ -7,13 +7,11 @@ passengersExist=0;
 void New_Passenger_Resservation(void)
 {
     int Erorr_State=0;
-    int ID;
+    int ID,Flight_Number;
     char Name[20];
     char Address[100];
     long long phoneNumber;
-    char Departure_City[50];
-    char Arrival_City  [50];
-    char Travilling_Date[20];
+
     int count;
 
         fflush(stdin );
@@ -30,17 +28,12 @@ void New_Passenger_Resservation(void)
 
         Invalid :
         fflush(stdin );
-        printf("Enter The Departure City:  \n");
-        gets(Departure_City);
-        printf("Enter The Arrival City :   \n");
-        gets(Arrival_City  );
-        printf("Enter The Date for Travel: \n");
-        gets(Travilling_Date);
+        display_Flights();
+        printf("Enter The Flight Number:\n");
+        scanf(" % i",&Flight_Number);
         for(count=0;count<=flightsExist;count++)
         {
-            if((trip[count].departureCity==Departure_City)&&
-               (trip[count].arrivalCity  ==Arrival_City  )&&
-               (trip[count].flightDate   ==Travilling_Date))
+            if(trip[count].flightNumber==Flight_Number)
             {
                       if(TicketExist<MAX_PASSENGERS)
                 {
@@ -56,16 +49,10 @@ void New_Passenger_Resservation(void)
                     tkt   [TicketExist].flightNumber     =trip[count].flightNumber;
 
                     printf("There is Avalible Ticket For you                                   \n");
-                    printf("%iThe Date For Your flight is = %s\n",TicketExist,trip[count].flightDate);
-                    printf("\nThe Number of Your Flight is = %i\n",trip[count].flightNumber);
                     printf("%iThe Number of Your Ticket is = %i\n" ,tkt[TicketExist].number);
-                    printf("The Departure City is = %s      \n ",trip[count].departureCity );
-                    printf("The Arrival City is = %s        \n" ,trip[count].arrivalCity   );
-                    printf("The Departure Time is = %s      \n" ,trip[count].departureTime );
-                    printf("The Arrival Time is = %s        \n" ,trip[count].arrivalTime   );
-
+                    fflush(stdin);
                     printf("Enter The Date of your Reservation:                         \n");
-                    gets(tkt[TicketExist+1].resDate                                        );
+                    gets(tkt[TicketExist].resDate                                        );
 
                     printf("\n****Your Reservation is Accepted !!****1\n");
                     TicketExist++;
@@ -73,7 +60,7 @@ void New_Passenger_Resservation(void)
 
                     printf("\n(1) To Passenger Seeting\n");
                     printf("(2) To Quit             \n");
-                    scanf("%i",choice);
+                    scanf("%i",&choice);
 
                     switch(choice)
                     {
@@ -82,6 +69,7 @@ void New_Passenger_Resservation(void)
                         case 2 :
                               return (0);
                     }
+                    break;
                 }
                 else
                 {
@@ -124,6 +112,7 @@ void New_Passenger_Resservation(void)
             }
         }
 }
+
 
 
 ////////////////////////////////////////////////////////////////////////////
