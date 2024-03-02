@@ -1,3 +1,4 @@
+
 #define MAX_FLIGHTS 100
 #define MAX_PASSENGERS 100
 
@@ -49,3 +50,4 @@ void New_Passenger_Resservation(void);
 void modify_reservation(void);
 void update_flight(int flight_num);
 void display_Flights();
+void Show_Reservation_Log(int passengerID);
