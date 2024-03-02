@@ -109,7 +109,6 @@ void passenger_Settings(void){
     invalid:
     printf("\n");
     printf("Enter a Number: ");
-    scanf("%d", &choice);
     if (scanf("%d", &choice) != 1){
         printf("Invalid Input!");
         scanf("%*[^\n]");
