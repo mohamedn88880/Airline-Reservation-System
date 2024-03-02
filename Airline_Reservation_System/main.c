@@ -53,7 +53,7 @@ int main()
 
 
 //////////////////////////////////////////////////////////Functions' Code
-void admin_Settings(){
+void admin_Settings(void){
     unsigned int choice;
     unsigned int flight_num;//number of flight which will add or update or delete (mahmoud);
 
@@ -89,7 +89,7 @@ void admin_Settings(){
 
 }
 
-void passenger_Settings(){
+void passenger_Settings(void){
     unsigned int choice;
     int passengerID = 0;
     bool loggedin = false; // true for testing //////////////////////////////////////////////////////////////
@@ -151,7 +151,7 @@ void passenger_Settings(){
 
 }
 
-int loginSignup(){
+int loginSignup(void){
     unsigned int choice;
     unsigned int ID = 0;
 
@@ -218,5 +218,5 @@ int loginSignup(){
             printf("Invalid Input!\n");
             goto invalid;
     }
-};
+}
 
