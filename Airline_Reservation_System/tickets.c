@@ -147,13 +147,13 @@ void modify_reservation(void){
             printf("7. Back\n");
             printf("\nEnter your choice: ");
             scanf("%d",&choice);
-
+            fflush(stdin );
             switch(choice){
             case 1:
                 printf("Enter new passenger name: ");
-                scanf("%s",& check);
-                printf("1. confirm\n");
-                printf("2. back\n");
+                gets(check);
+                printf("(1). confirm\n");
+                printf("(2). back\n");
                 printf("\nEnter your choice: ");
                 scanf("%d",& confirm);
                 switch(confirm){
@@ -171,9 +171,9 @@ void modify_reservation(void){
 
             case 2:
                 printf("Enter new passenger address: ");
-                scanf("%s",& check);
-                printf("1. confirm\n");
-                printf("2. back\n");
+                gets(check);
+                printf("(1). confirm\n");
+                printf("(2). back\n");
                 printf("\nEnter your choice: ");
                 scanf("%d",& confirm);
                 switch(confirm){
@@ -191,8 +191,8 @@ void modify_reservation(void){
                 printf("Enter new phone number: ");
 
                 scanf("%d",& checkint);
-                printf("1. confirm\n");
-                printf("2. back\n");
+                printf("(1). confirm\n");
+                printf("(2). back\n");
                 printf("\nEnter your choice: ");
                 scanf("%d",& confirm);
                 switch(confirm){
@@ -210,8 +210,8 @@ void modify_reservation(void){
             case 4:
                 printf("Enter new passenger ID: ");
                 scanf("%lld",& checkint);
-                printf("1. confirm\n");
-                printf("2. back\n");
+                printf("(1). confirm\n");
+                printf("(2). back\n");
                 printf("\nEnter your choice: ");
                 scanf("%d",& confirm);
                 switch(confirm){
@@ -231,8 +231,8 @@ void modify_reservation(void){
                 printf("Enter new flight number: ");
 
                 scanf("%d",& checkint);
-                printf("1. confirm\n");
-                printf("2. back\n");
+                printf("(1). confirm\n");
+                printf("(2). back\n");
                 printf("\nEnter your choice: ");
                 scanf("%d",& confirm);
                 switch(confirm){
@@ -251,10 +251,10 @@ void modify_reservation(void){
 
             case 6:
                 printf("\nEnter new passenger name: ");
-                scanf("%s",&pasngr[i].Name);
+                gets(pasngr[i].Name);
 
                 printf("Enter new passenger address: ");
-                scanf("%s",&pasngr[i].Address);
+                gets(pasngr[i].Address);
 
                 printf("Enter new phone number: ");
                 scanf("%d",&pasngr[i].phoneNumber);
