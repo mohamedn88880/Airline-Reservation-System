@@ -160,7 +160,7 @@ void update_flight(int flight_num){
         }
 
 
-       
+
     }
      if(!flag) {
         printf("\nFlight schedule not found!\n\n");
@@ -234,8 +234,9 @@ void New_Flight_Schedule(void)
 ////////////////////////////////////////////////////////////////////// Search Available Flights
 
 void Search_Available_Flights () {
-    all:
+
         char DepartureCity[50], ArrivalCity[50], FlightDate[20] ;
+        all:
      printf("Enter The Departure city:\n");
      gets(DepartureCity) ;
 
@@ -264,7 +265,7 @@ void Search_Available_Flights () {
        if(flag != 0){
 
             printf("1. Add new reservation\n");
-            printf("2. Search for other flight\n")
+            printf("2. Search for other flight\n");
             printf("3. back\n");
             printf("\nEnter your choice: ");
 
@@ -284,7 +285,7 @@ void Search_Available_Flights () {
 
         else {
             printf("Unavailable\n") ;
-            printf("1. Search for other flight\n")
+            printf("1. Search for other flight\n");
             printf("2. back\n");
             printf("\nEnter your choice: ");
 
@@ -317,5 +318,41 @@ void display_Flights() {
 
     printf("------------------------------------------------------------------------------------------------------------------------\n");
     passenger_Settings();
+}
+/////////////////////////////
+int deleteFlight(){
+        unsigned int choice;
+        int flightID;
+        reenter:
+        printf ("please enter the flightID you want to delete");
+
+               scanf("%d",&flightID);
+               for (int i=0;i<flightsExist;i++){
+                if(trip[i].flightNumber==flightID){
+                     trip[i] = trip[i+1];
+
+                    printf("Flight schedule %d delete successfully.\n",flightID);
+                    flightsExist--;
+
+                }
+                else{
+                    printf("\n(1) to Admin Setting\n");
+                    printf("(2) to Quit           \n");
+                    scanf("%i",&choice);
+
+                    switch(choice)
+                    {
+                        case 1 :
+                            goto reenter;
+                             break;
+                        case 2 :
+                            return(0);
+                    }
+                    printf("Flight %s not found.\n",flightID);
+
+     }
+
+
+}
 }
 
