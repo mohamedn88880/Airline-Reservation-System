@@ -160,10 +160,11 @@ void update_flight(int flight_num){
         }
 
 
-        if(!flag) {
+       
+    }
+     if(!flag) {
         printf("\nFlight schedule not found!\n\n");
         admin_Settings();
-    }
     }
 
 
@@ -243,5 +244,6 @@ void display_Flights() {
     }
 
     printf("------------------------------------------------------------------------------------------------------------------------\n");
+    passenger_Settings();
 }
 
