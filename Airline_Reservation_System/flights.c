@@ -1,26 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX_FLIGHTS 100
-
-typedef struct Flight{
-
-    int flightNumber;
-    int availableSeats;
-    char flightDate[20]; // DD/MM/YYYY
-    char departureTime[20]; // HH:MM
-    char departureCity[50];
-    char arrivalTime[20]; // HH:MM
-    char arrivalCity[50];
-
-}Flight;
-
-static Flight trip[MAX_FLIGHTS];
-int flightsExist = 0;
-
-Flight passFlightsArray(Flight *trip){
-    return *trip;
-}
-
+#include "projectHeader.h"
+flightsExist=0;
 void update_flight(int flight_num){
     int flag = 0;
     int choice,confirm;
@@ -185,16 +166,14 @@ void update_flight(int flight_num){
 
 
 }
-//////////////////////////////////////////////////////////////////
+//////////////////////////////Add New flight
 void New_Flight_Schedule(void)
 {
-    int Numbers=flightsExist;
-
-    if((flightsExist)<MAX_FLIGHTS)
+    if((flightsExist<MAX_FLIGHTS))
     {
          int choice=0;
-         printf("Enter The Flight Number:  \n");
-         scanf("%i",&trip[flightsExist]. flightNumber );
+         printf("%i\nEnter The Flight Number:  \n",flightsExist);
+         scanf("%i",&trip[flightsExist].flightNumber );
 
          printf("Enter The Number of Seats:\n");
          scanf("%i",&trip[flightsExist].availableSeats);
@@ -213,11 +192,11 @@ void New_Flight_Schedule(void)
          gets(trip[flightsExist].arrivalCity          );
 
          printf("Enter The Arrival_Time:  \n");
-         gets(trip[flightsExist].arrivalTime         );
-         fflush(stdin);
+         gets(trip[flightsExist].arrivalTime          );
+
          printf("\n...You Add New Flight Schedule Successfully...\n");
-         Numbers++;
          flightsExist++;
+
          printf("\n(1) To Go To Admin Setting\n");
          printf("(2) To Quit                 \n");
          scanf("%i",&choice);
@@ -247,5 +226,4 @@ void New_Flight_Schedule(void)
         }
 
     }
-
 }
