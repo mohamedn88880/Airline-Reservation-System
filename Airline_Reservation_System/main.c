@@ -103,7 +103,8 @@ void passenger_Settings(void){
     printf("4. Cancel reservation\n");
     printf("5. Modify reservation\n");
     printf("6. Show reservation log\n");
-    printf("7. Main Menu\n");
+    printf("7. Display all flights\n");
+    printf("8. Main Menu\n");
 
     invalid:
     printf("\n");
@@ -141,7 +142,12 @@ void passenger_Settings(void){
     case 6:
 
         break;
-    case 7:
+
+        case 7:
+        display_Flights();
+        break;
+
+    case 8:
         main();
         break;
     default:
