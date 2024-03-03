@@ -175,32 +175,64 @@ void New_Flight_Schedule(void)
 {
     if((flightsExist<MAX_FLIGHTS))
     {
-         int choice=0;
-         printf("\nEnter The Flight Number:  \n");
-         scanf("%i",&trip[flightsExist].flightNumber );
-
-         printf("Enter The Number of Seats:\n");
-         scanf("%i",&trip[flightsExist].availableSeats);
+         int choice=0,choice1,count,Flight_Number;
+         for(count=0;count<=flightsExist;count++)
+         {
+             invalid:
+             printf("\nEnter The Flight Number:");
+             if (scanf("%i", &Flight_Number) != 1)
+            {
+             printf("Invalid Input!");
+             scanf("%*[^\n]");
+             goto invalid;
+             }
+             if((trip[count].flightNumber)!=Flight_Number)
+             {
+                 trip[flightsExist].flightNumber=Flight_Number;
+                 break;
+             }
+             else
+             {
+                 printf("Invalid!!!Thers is another Flight With This Number\n");
+                 New_Flight_Schedule();
+             }
+         }
+         invalid1 :
+         printf("Enter The Number of Seats:");
+         if (scanf("%i", &trip[flightsExist].availableSeats)!= 1){
+             printf("Invalid Input!");
+             scanf("%*[^\n]");
+             goto invalid1;
+         }
          fflush(stdin);
 
-         printf("Enter The Flight Date:   \n");
-         gets(trip[flightsExist].flightDate           );
+         printf("Enter The Flight Date:");
+         gets(trip[flightsExist].flightDate);
 
-         printf("Enter The Departure_city:\n");
-         gets(trip[flightsExist].departureCity        );
+         printf("Enter The Departure_city:");
+         gets(trip[flightsExist].departureCity );
 
-         printf("Enter The Departure_Time:\n");
-         gets(trip[flightsExist].departureTime        );
+         printf("Enter The Departure_Time:");
+         gets(trip[flightsExist].departureTime);
 
-         printf("Enter The Arrival_city:  \n");
-         gets(trip[flightsExist].arrivalCity          );
+         printf("Enter The Arrival_city:");
+         gets(trip[flightsExist].arrivalCity);
 
-         printf("Enter The Arrival_Time:  \n");
-         gets(trip[flightsExist].arrivalTime          );
+         printf("Enter The Arrival_Time:");
+         gets(trip[flightsExist].arrivalTime);
 
-         printf("\n...You Add New Flight Schedule Successfully...\n");
-         flightsExist++;
-
+          printf("Enter (1) To Save The Informatiom\n");
+                    printf("Enter (0) To change \n");
+                    scanf("%i",&choice1);
+                    switch(choice1)
+                    {
+                          case 0 :
+                              New_Flight_Schedule();
+                          case 1 :
+                                printf("\n...You Add New Flight Schedule Successfully...\n");
+                                flightsExist++;
+                                break;
+                    }
          printf("\n(1) To Go To Admin Setting\n");
          printf("(2) To Quit                 \n");
          scanf("%i",&choice);
@@ -216,7 +248,6 @@ void New_Flight_Schedule(void)
     {
         int choice=0;
         printf("\nSorry, You can't Add Anew_Flight. The System Is Full !!!\n");
-
         printf("\n(1) to Admin Setting\n");
         printf("(2) to Quit           \n");
         scanf("%i",&choice);
@@ -231,6 +262,7 @@ void New_Flight_Schedule(void)
 
     }
 }
+////////////////////////////////////////////////////////////////////// Search Available Flights
 ////////////////////////////////////////////////////////////////////// Search Available Flights
 
 void Search_Available_Flights () {
