@@ -54,13 +54,15 @@ int main()
 
 //////////////////////////////////////////////////////////Functions' Code
 void admin_Settings(void){
+
     unsigned int choice;
     unsigned int flight_num;//number of flight which will add or update or delete (mahmoud);
 
     printf("1. Add new flight\n");
     printf("2. Delete existing flight schedule\n");
     printf("3. Update existing flight schedule\n");
-    printf("4. Main Menu\n");
+    printf("4. Display all flights\n");
+    printf("5. Main Menu\n");
 
     invalid:
     printf("\n");
@@ -72,7 +74,7 @@ void admin_Settings(void){
         New_Flight_Schedule();
         break;
     case 2:
-
+        deleteFlight();
         break;
     case 3:
         printf("\n\nEnter flight number to UPDATE: ");
@@ -80,6 +82,9 @@ void admin_Settings(void){
         update_flight(flight_num);
         break;
     case 4:
+        display_Flights();
+        break;
+        case 5:
         main();
         break;
     default:
@@ -92,6 +97,7 @@ void admin_Settings(void){
 void passenger_Settings(void){
     unsigned int choice;
     int passengerID = 0;
+
     bool loggedin = false; // true for testing //////////////////////////////////////////////////////////////
     begin:
     printf("You're ");
@@ -113,7 +119,7 @@ void passenger_Settings(void){
         printf("Invalid Input!");
         scanf("%*[^\n]");
         goto invalid;
-    } else if (!loggedin && choice != 1 && choice != 7){
+    } else if (!loggedin && choice != 1 && choice != 7 &&choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice !=6  ){
         printf("Please login the system first!\n");
         goto invalid;
     }
@@ -127,19 +133,19 @@ void passenger_Settings(void){
         goto begin;
         break;
     case 2:
-
+        Search_Available_Flights ();
         break;
     case 3:
         New_Passenger_Resservation();
         break;
     case 4:
-
+         reservationcancel();
         break;
     case 5:
         modify_reservation();
         break;
     case 6:
-
+         Show_Reservation_Log();
         break;
 
         case 7:
