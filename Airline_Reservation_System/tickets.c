@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <string.h>
 #include "projectHeader.h"
@@ -16,19 +17,19 @@ void New_Passenger_Resservation(void)
     int count;
 
         fflush(stdin );
-        printf("Enter Your Name:        \n");
+        printf("Enter Your Name: ");
         gets(Name    );
 
-        printf("Enter your Adress:      \n");
+        printf("Enter your Adress: ");
         gets(Address );
 
-        printf("Enter you ID:          \n");
+        printf("Enter you ID: ");
         scanf("%i",&ID);
-        printf("Enter Your Phone Number:\n");
+        printf("Enter Your Phone Number: ");
         scanf("%lli",&phoneNumber);
         Invalid :
         fflush(stdin );
-        printf("Enter The Number of Flight:\n");
+        printf("Enter The Number of Flight: ");
         scanf("%i",&Flight_Number);
         for(count=0;count<=flightsExist;count++)
         {
@@ -44,7 +45,7 @@ void New_Passenger_Resservation(void)
                     pasngr[passengersExist].ID          =ID                      ;
                     pasngr[passengersExist].phoneNumber = phoneNumber            ;
                     tkt   [TicketExist].passengerID     =ID                      ;
-                    tkt   [TicketExist].number          =TicketExist             ;
+                    tkt   [TicketExist].number          =TicketExist+1             ;
                     tkt   [TicketExist].flightNumber     =trip[count].flightNumber;
 
                     printf("There is Avalible Ticket For you                                   \n");
@@ -276,36 +277,38 @@ void modify_reservation(void){
 }
 ////////////////////////////////////////////////////////////////////// Show reservation log
 
-void Show_Reservation_Log(int passengerID){
-    int flag = 0, choice ;
+void Show_Reservation_Log(){
+    int flag = -1, choice ;
+    long long passengerID;
+    printf("Enter your ID: ");
+    scanf("%lld",&passengerID);
     for(int i = 0; i < TicketExist; i++){
         if(tkt[i].passengerID == passengerID )
-            flag++ ;
+            flag = i ;
+            break;
     }
 
-    if(flag != 0){
+    if(flag != -1){
     printf("\nYour Flight Schedules:\n");
-    printf("------------------------------------------------------------------------------------------------------------------------\n");
-    printf("| Flight Number | departure city           | Departure Time   | arrival city      | arrival time  | available seats    \n");
-    printf("------------------------------------------------------------------------------------------------------------------------\n");
-
-    for (int i = 0; i < TicketExist ; i++) {
-            if(tkt[i].passengerID == passengerID ){
-        printf("| %d             | %s               |           %s   |             %s|             %s|             %d|            %s|\n", trip[i].flightNumber, trip[i].departureCity, trip[i].departureTime, trip[i].arrivalCity, trip[i].arrivalTime, trip[i].availableSeats ,trip[i].flightDate);
-       }
+    printf("-----------------------------------------------------------------------------------------------------------------\n");
+   printf("%-20s%-20s%-20s%-15s%-15s%-15s\n","flight number", "passenger ID", "passenger number", "passenger addres", "passenger Name", "Flight Date");
+    printf("-----------------------------------------------------------------------------------------------------------------\n");
+   for (int j = flag; j < flightsExist; j++) {
+        printf("%-20d%-20d%-20d%-15s%-15s%-15s\n",
+               trip[j].flightNumber,tkt[j].passengerID, pasngr[j].phoneNumber,
+               pasngr[j].Address, pasngr[j].Name,
+               trip[j].flightDate);
     }
 
-    printf("------------------------------------------------------------------------------------------------------------------------\n");
-
+    printf("--------------------------------------------------------------------------------------------------------------------\n");
+    passenger_Settings();
     }
 
     else{
         printf("THERE IS NO RESERVATION");
     }
 
-    printf("1. back\n");
-    printf("\nEnter your choice: ");
-    scanf("%d", &choice);
+
      passenger_Settings() ;
 }
 /////////////////////////
@@ -313,23 +316,26 @@ int reservationcancel()
 {
     unsigned int choice;
     int numberreservation;
-
-    reenter:
-    printf("please enter your number reservation:\n");
-    scanf("%d",&numberreservation);
     int i;
-    for ( i; i < TicketExist; i++)
+
+    printf("please enter your ticket number: ");
+    scanf("%d",&numberreservation);
+
+    for ( i = 0; i < TicketExist; i++)
     {
         if(tkt[i].number==numberreservation)
         {
-            for(int j = i;j < TicketExist;j++){
+            for(int j = i;j < TicketExist-1;j++){
                 tkt[j] = tkt[j+1];
             }
-            printf("the number cancelled successfully");
+            printf("the reservation cancelled successfully");
             TicketExist--;
+            passenger_Settings();
+
         }
         else
         {
+            printf("the number reservation not found");
             printf("\n(1) to Admin Setting\n");
             printf("(2) to Quit           \n");
             scanf("%i",&choice);
@@ -337,16 +343,14 @@ int reservationcancel()
             switch(choice)
                 {
                     case 1 :
-                        goto reenter;
+                        admin_Settings();
                         break;
                     case 2 :
                         return(0);
                 }
-            printf("the number reservation not found");
+
         }
 
 
     }
 }
-
-
