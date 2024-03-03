@@ -3,10 +3,14 @@
 #include "projectHeader.h"
 TicketExist=0;
 passengersExist=0;
+
+
+
+////////////////////////////////////////////////////////////////////////////
 void New_Passenger_Resservation(void)
 {
     int Erorr_State=0;
-    int ID,Flight_Number;
+    int Flight_Number;
     char Name[20];
     char Address[100];
     long long phoneNumber;
@@ -16,37 +20,53 @@ void New_Passenger_Resservation(void)
     int count;
 
         fflush(stdin );
-        printf("Enter Your Name:        \n");
+        printf("Enter Your Name:");
         gets(Name    );
 
-        printf("Enter your Adress:      \n");
+        printf("Enter your Adress:");
         gets(Address );
+        reenter :
+        printf("Enter Your Phone Number:");
+        if ( scanf("%lli",&phoneNumber)!= 1){
+                printf("Invalid Input!\n");
+                scanf("%*[^\n]");
+                goto reenter;
+            }
 
-        printf("Enter you ID:          \n");
-        scanf("%i",&ID);
-        printf("Enter Your Phone Number:\n");
-        scanf("%lli",&phoneNumber);
         Invalid :
         fflush(stdin );
-        printf("Enter The Number of Flight:\n");
-        scanf("%i",&Flight_Number);
+        printf("Enter The Number of Flight:");
+         if (scanf("%i",&Flight_Number)!= 1){
+                printf("Invalid Input!\n");
+                scanf("%*[^\n]");
+                goto Invalid;
+            }
+
         for(count=0;count<=flightsExist;count++)
         {
             if((trip[count].flightNumber)==Flight_Number)
             {
                       if(TicketExist<MAX_PASSENGERS)
                 {
-                    int choice = 0;
+                    int choice = 0,choice1;
                     Erorr_State=1;
+                    printf("Enter (1) To Save The Informatiom\n");
+                    printf("Enter (0) To change \n");
+                    scanf("%i",&choice1);
+                    switch(choice1)
+                    {
+                    case 1 :
+                         strcpy(pasngr[passengersExist].Name   ,Name                 );
+                         strcpy(pasngr[passengersExist].Address,Address              );
+                         pasngr[passengersExist].phoneNumber = phoneNumber            ;
+                         tkt   [TicketExist].passengerID     =pasngr[passengersExist].ID;
+                         tkt   [TicketExist].number          =TicketExist             ;
+                         tkt   [TicketExist].flightNumber     =trip[count].flightNumber;
+                         break;
+                    case 0 :
+                        New_Passenger_Resservation();
 
-                    strcpy(pasngr[passengersExist].Name   ,Name                 );
-                    strcpy(pasngr[passengersExist].Address,Address              );
-                    pasngr[passengersExist].ID          =ID                      ;
-                    pasngr[passengersExist].phoneNumber = phoneNumber            ;
-                    tkt   [TicketExist].passengerID     =ID                      ;
-                    tkt   [TicketExist].number          =TicketExist             ;
-                    tkt   [TicketExist].flightNumber     =trip[count].flightNumber;
-
+                    }
                     printf("There is Avalible Ticket For you                                   \n");
                     printf("The Date For Your flight is = %s\n",trip[count].flightDate);
                     printf("The Number of Your Ticketis =%i \n" ,tkt[TicketExist].number);
@@ -111,9 +131,6 @@ void New_Passenger_Resservation(void)
             }
         }
 }
-
-
-////////////////////////////////////////////////////////////////////////////
 
 
 
