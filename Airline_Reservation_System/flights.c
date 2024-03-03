@@ -1,3 +1,5 @@
+
+
 #include <stdio.h>
 #include <string.h>
 #include "projectHeader.h"
@@ -236,14 +238,15 @@ void New_Flight_Schedule(void)
 void Search_Available_Flights () {
 
         char DepartureCity[50], ArrivalCity[50], FlightDate[20] ;
+        fflush(stdin);
         all:
-     printf("Enter The Departure city:\n");
+     printf("Enter The Departure city: ");
      gets(DepartureCity) ;
 
-     printf("Enter The Arrival city:  \n");
+     printf("Enter The Arrival city: ");
      gets(ArrivalCity) ;
 
-     printf("Enter The Flight Date:\n");
+     printf("Enter The Flight Date: ");
      gets(FlightDate) ;
 
 
@@ -251,12 +254,12 @@ void Search_Available_Flights () {
 
     for(int i = 0 ; i < flightsExist ; i++){
 
-        if(trip[i].departureCity == DepartureCity && trip[i].arrivalCity == ArrivalCity &&
-            trip[i].flightDate == FlightDate){
+        if(strcmp(trip[i].departureCity , DepartureCity) ==0 && strcmp(trip[i].arrivalCity, ArrivalCity)==0 &&
+            strcmp(trip[i].flightDate , FlightDate)==0){
             flag ++ ;
             printf("Available") ;
-            printf("\nDeparture time: ", trip[i].departureTime);
-            printf("\nArrival time: ", trip[i].arrivalTime);
+            printf("\nDeparture time: %s", trip[i].departureTime);
+            printf("\nArrival time: %s\n", trip[i].arrivalTime);
 
         }
 
@@ -307,52 +310,63 @@ void Search_Available_Flights () {
 
 //////////////display flights
 void display_Flights() {
-    printf("\nFlight Schedules:\n");
-    printf("------------------------------------------------------------------------------------------------------------------------\n");
-    printf("| Flight Number | departure city           | Departure Time   | arrival city      | arrival time  | available seats    \n");
-    printf("------------------------------------------------------------------------------------------------------------------------\n");
+    int miny;
+    printf("\n\n\nFlight Schedules:\n");
+    printf("------------------------------------------------------------------------------------------------\n");
+   printf("%-15s%-20s%-20s%-15s%-15s%-15s\n","Flight number", "Departure City", "Arrival City", "Departure Time", "Arrival Time", "Flight Date");
+    printf("-------------------------------------------------------------------------------------------------\n");
 
-    for (int i = 0; i < flightsExist ; i++) {
-        printf("| %d             | %s               |           %s   |             %s|             %s|             %d|            %s|\n", trip[i].flightNumber, trip[i].departureCity, trip[i].departureTime, trip[i].arrivalCity, trip[i].arrivalTime, trip[i].availableSeats ,trip[i].flightDate);
+   for (int i = 0; i < flightsExist; i++) {
+        printf("%-15d%-20s%-20s%-15s%-15s%-15s\n",
+               trip[i].flightNumber,trip[i].departureCity,
+               trip[i].arrivalCity, trip[i].departureTime,
+               trip[i].arrivalTime, trip[i].flightDate);
     }
 
-    printf("------------------------------------------------------------------------------------------------------------------------\n");
+    printf("--------------------------------------------------------------------------------------------------\n\n\n");
+    printf("1. admin settings\n");
+    printf("2. passenger settings\n");
+    scanf("%d",&miny);
+    switch(miny){
+case 1:
+    admin_Settings();
+
+case 2:
     passenger_Settings();
+    }
+
 }
 /////////////////////////////
-int deleteFlight(){
-        unsigned int choice;
-        int flightID;
-        reenter:
-        printf ("please enter the flightID you want to delete");
+void deleteFlight(){
+        if (flightsExist > 0) {
+        int flightNumber;
+        int m='!';
+        printf("Enter the flight number to delete: ");
+        scanf("%d", &flightNumber);
 
-               scanf("%d",&flightID);
-               for (int i=0;i<flightsExist;i++){
-                if(trip[i].flightNumber==flightID){
-                     trip[i] = trip[i+1];
+        int index = -1;
+        for (int i = 0; i < flightsExist; i++) {
+            if (trip[i].flightNumber == flightNumber) {
+                index = i;
+                break;
+            }
+        }
 
-                    printf("Flight schedule %d delete successfully.\n",flightID);
-                    flightsExist--;
+        if (index != -1) {
 
-                }
-                else{
-                    printf("\n(1) to Admin Setting\n");
-                    printf("(2) to Quit           \n");
-                    scanf("%i",&choice);
+            for (int j = index; j < flightsExist - 1; j++) {
+                trip[j] = trip[j + 1];
 
-                    switch(choice)
-                    {
-                        case 1 :
-                            goto reenter;
-                             break;
-                        case 2 :
-                            return(0);
-                    }
-                    printf("Flight %s not found.\n",flightID);
+            }
 
-     }
-
-
+            printf("Flight schedule deleted successfully.\n");
+            admin_Settings();
+        } else {
+            printf("Flight number not found. No flight deleted.\n");
+            admin_Settings();
+        }
+    } else {
+        printf("No flights to delete.\n");
+        admin_Settings();
+    }
 }
-}
-
