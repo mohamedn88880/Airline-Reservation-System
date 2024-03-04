@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <string.h>
 #include "projectHeader.h"
@@ -30,8 +29,8 @@ void update_flight(int flight_num){
             case 1:
 
                 printf("Enter new departure city: ");
-
                 gets(check);
+                Invalid1 :
                 printf("(1). confirm\n");
                 printf("(2). back\n");
                 printf("\nEnter your choice: ");
@@ -45,6 +44,9 @@ void update_flight(int flight_num){
                 case 2:
                     printf("\n***NO changes occurred***\n");
                     goto all;
+                default :
+                    printf("Invalid choice!!!");
+                    goto Invalid1;
                 }
 
 
@@ -54,6 +56,7 @@ void update_flight(int flight_num){
             case 2:
                 printf("Enter new departure time: ");
                 gets(check);
+                Invalid2 :
                 printf("(1). confirm\n");
                 printf("(2). back\n");
                 printf("\nEnter your choice: ");
@@ -67,14 +70,15 @@ void update_flight(int flight_num){
                 case 2:
                     printf("\n***NO changes occurred***\n");
                     goto all;
+                default :
+                    printf("Invalid choice!!!");
+                    goto Invalid2;
                 }
-
-
-
 
             case 3:
                 printf("Enter new arrival city: ");
                 gets(check);
+                Invalid3 :
                 printf("(1). confirm\n");
                 printf("(2). back\n");
                 printf("\nEnter your choice: ");
@@ -88,12 +92,17 @@ void update_flight(int flight_num){
                 case 2:
                     printf("\n***NO changes occurred***\n");
                     goto all;
+                    break;
+                 default :
+                    printf("Invalid choice!!!");
+                    goto Invalid3;
                 }
 
 
             case 4:
                 printf("Enter new arrival time: ");
                 gets(check);
+                Invalid4:
                 printf("(1). confirm\n");
                 printf("(2). back\n");
                 printf("\nEnter your choice: ");
@@ -107,6 +116,10 @@ void update_flight(int flight_num){
                 case 2:
                     printf("\n***NO changes occurred***\n");
                     goto all;
+                    break;
+                 default :
+                    printf("Invalid choice!!!");
+                    goto Invalid4;
                 }
 
 
@@ -114,6 +127,7 @@ void update_flight(int flight_num){
             case 5:
                 printf("Enter new flight date: ");
                 gets(check);
+                Invalid5:
                 printf("(1). confirm\n");
                 printf("(2). back\n");
                 printf("\nEnter your choice: ");
@@ -127,6 +141,10 @@ void update_flight(int flight_num){
                 case 2:
                     printf("\n***NO changes occurred***\n");
                     goto all;
+                    break;
+                 default :
+                    printf("Invalid choice!!!");
+                    goto Invalid5;
                 }
 
 
@@ -221,7 +239,7 @@ void New_Flight_Schedule(void)
 
          printf("Enter The Arrival_Time:");
          gets(trip[flightsExist].arrivalTime);
-
+          Invalid2:
           printf("1. Save The Informatiom\n");
           printf("2. To change \n");
                     printf("Enter your choice: ");
@@ -235,7 +253,11 @@ void New_Flight_Schedule(void)
                                 printf("\n...You Add New Flight Schedule Successfully...\n");
                                 flightsExist++;
                                 break;
+                         default :
+                         printf("Invalid choice!!!");
+                         goto Invalid2;
                     }
+         Invalid3:
          printf("\n(1) To Go To Admin Setting\n");
          printf("(2) To Quit                 \n");
          printf("Enter your choice: ");
@@ -247,6 +269,9 @@ void New_Flight_Schedule(void)
                case 2 :
                    return (0);
                    break;
+                 default :
+                    printf("Invalid choice!!!");
+                    goto Invalid3;
          }
     }
     else
@@ -281,7 +306,8 @@ void Search_Available_Flights (int passengerID) {
         fflush(stdin);
         all:
      printf("Enter The Departure city: ");
-     gets(DepartureCity) ;
+     fflush(stdin);
+     gets( DepartureCity) ;
 
      printf("Enter The Arrival city: ");
      fflush(stdin);
@@ -308,7 +334,7 @@ void Search_Available_Flights (int passengerID) {
 
        if(flag != 0){
 
-
+            Invalid:
             printf("1. Search for other flight\n");
             printf("2. back\n");
             printf("\nEnter your choice: ");
@@ -322,6 +348,10 @@ void Search_Available_Flights (int passengerID) {
 
             case 2 :
                 passenger_Settings() ;
+                break;
+             default :
+                    printf("Invalid choice!!!");
+                    goto Invalid;
             }
        }
 
@@ -339,6 +369,7 @@ void Search_Available_Flights (int passengerID) {
 
             case 2 :
                 passenger_Settings() ;
+                break;
 
             }
         }
@@ -369,9 +400,11 @@ void display_Flights() {
     switch(miny){
 case 1:
     admin_Settings();
+    break;
 
 case 2:
     passenger_Settings();
+    break;
     }
 
 }
@@ -389,6 +422,7 @@ int deleteFlight(){
 
                     printf("Flight schedule %d delete successfully.\n",flightID);
                     flightsExist--;
+                    Invalid:
                     printf("\n1. to Admin Setting\n");
                     printf("2. to Quit           \n");
                     printf("Enter your choice: ");
@@ -405,6 +439,7 @@ int deleteFlight(){
 
                 }
                 else{
+                    printf("Flight %s not found.\n\n",flightID);
                     printf("\n(1) to Admin Setting\n");
                     printf("(2) to Quit           \n");
                     scanf("%i",&choice);
@@ -416,11 +451,16 @@ int deleteFlight(){
                              break;
                         case 2 :
                             return(0);
+                            break;
+                         default :
+                           printf("Invalid choice!!!");
+                           goto Invalid;
                     }
-                    printf("Flight %s not found.\n",flightID);
+
 
      }
 
 
 }
 }
+
