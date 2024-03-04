@@ -31,7 +31,7 @@ void New_Passenger_Resservation(int passengerID)
 
         Invalid :
         fflush(stdin );
-        printf("Enter The Number of Flight: ");
+        printf("Enter The Number of Flight:");
          if (scanf("%i",&Flight_Number)!= 1){
                 printf("Invalid Input!\n");
                 scanf("%*[^\n]");
@@ -46,20 +46,20 @@ void New_Passenger_Resservation(int passengerID)
                 {
                     int choice = 0,choice1;
                     Erorr_State=1;
-                    printf("1. To Save The Informatiom\n");
-                    printf("2. To change \n");
+                    printf("Enter (1) To Save The Informatiom\n");
+                    printf("Enter (0) To change \n");
                     scanf("%i",&choice1);
                     switch(choice1)
                     {
                     case 1 :
-                         strcpy(pasngr[passengersExist].Name   ,Name );
-                         strcpy(pasngr[passengersExist].Address,Address );
-                         pasngr[passengersExist].phoneNumber = phoneNumber ;
+                         memcpy(pasngr[passengersExist].Name   ,Name,20              );
+                         strcpy(pasngr[passengersExist].Address,Address              );
+                         pasngr[passengersExist].phoneNumber = phoneNumber            ;
                          tkt   [TicketExist].passengerID     = passengerID;
-                         tkt   [TicketExist].number          =TicketExist+1 ;
-                         tkt   [TicketExist].flightNumber     =Flight_Number;
+                         tkt   [TicketExist].number          =TicketExist+1             ;
+                         tkt   [TicketExist].flightNumber     =trip[count].flightNumber;
                          break;
-                    case 2 :
+                    case 0 :
                         New_Passenger_Resservation(passengerID);
 
                     }
@@ -73,7 +73,7 @@ void New_Passenger_Resservation(int passengerID)
                     printf("\n*Your Reservation is Accepted !!*\n");
                     TicketExist++;
                     passengersExist++;
-
+                    Invalid1 :
                     printf("\n(1) To Passenger Seeting\n");
                     printf("(2) To Quit             \n");
                     printf("Enter your choice: ");
@@ -86,15 +86,20 @@ void New_Passenger_Resservation(int passengerID)
                         case 2 :
                               return (0);
                               break;
+                        default :
+                            printf("Invalid Choise !!!\n");
+                            goto Invalid1;
                     }
                 }
                 else
                 {
                     int choice;
-                    printf("Sorry The Tickets Are Full!!!\n");
+                    printf("Sorry The Tickets Are Full!!!\n\n");
+                    All:
                     printf("\n(1) To Try Again\n");
                     printf("(2) To Passenger Seeting\n");
                     printf("(3) To Quit     \n");
+                    printf("Enter Your Choise:");
                     scanf("%i",&choice);
                     switch(choice)
                     {
@@ -106,6 +111,9 @@ void New_Passenger_Resservation(int passengerID)
                           case 3 :
                              return (0);
                              break;
+                          default :
+                            printf("Invalid Choise !!!\n");
+                            goto All;
                     }
                 }
         }
@@ -114,6 +122,7 @@ void New_Passenger_Resservation(int passengerID)
         {
             int choice=0;
             printf("\nSorry,There Is Not Avalible Reservation for This Place!!!\n");
+            All1:
             printf("\n(1) To Try Again\n");
             printf("(2) To Passenger Seeting\n");
             printf("(3) To Quit     \n");
@@ -128,6 +137,9 @@ void New_Passenger_Resservation(int passengerID)
                 case 3 :
                     return (0);
                     break;
+                default :
+                    printf("Invalid Choise !!!\n");
+                    goto All1;
             }
         }
 }
@@ -164,6 +176,7 @@ void modify_reservation(int passengerID){
             case 1:
                 printf("Enter new passenger name: ");
                 gets(check);
+                Invalid1:
                 printf("(1). confirm\n");
                 printf("(2). back\n");
                 printf("\nEnter your choice: ");
@@ -177,6 +190,9 @@ void modify_reservation(int passengerID){
                 case 2:
                     printf("\n***NO changes occurred***\n");
                     goto all;
+                  default :
+                            printf("Invalid Choise !!!\n");
+                            goto Invalid1;
                 }
 
 
@@ -184,6 +200,7 @@ void modify_reservation(int passengerID){
             case 2:
                 printf("Enter new passenger address: ");
                 gets(check);
+                Invalid:
                 printf("(1). confirm\n");
                 printf("(2). back\n");
                 printf("\nEnter your choice: ");
@@ -197,12 +214,16 @@ void modify_reservation(int passengerID){
                 case 2:
                     printf("\n***NO changes occurred***\n");
                     goto all;
+                     default :
+                            printf("Invalid Choise !!!\n");
+                            goto Invalid;
                 }
 
             case 3:
                 printf("Enter new phone number: ");
 
                 scanf("%d",& checkint);
+                Invalid2:
                 printf("(1). confirm\n");
                 printf("(2). back\n");
                 printf("\nEnter your choice: ");
@@ -216,12 +237,16 @@ void modify_reservation(int passengerID){
                 case 2:
                     printf("\n***NO changes occurred***\n");
                     goto all;
+                  default :
+                    printf("Invalid Choise !!!\n");
+                    goto Invalid2;
                 }
 
 
             case 4:
                 printf("Enter new passenger ID: ");
                 scanf("%lld",& checkint);
+                Invalid3:
                 printf("(1). confirm\n");
                 printf("(2). back\n");
                 printf("\nEnter your choice: ");
@@ -235,6 +260,9 @@ void modify_reservation(int passengerID){
                 case 2:
                     printf("\n***NO changes occurred***\n");
                     goto all;
+                     default :
+                            printf("Invalid Choise !!!\n");
+                            goto Invalid3;
                 }
 
 
@@ -243,6 +271,7 @@ void modify_reservation(int passengerID){
                 printf("Enter new flight number: ");
 
                 scanf("%d",& checkint);
+                Invalid4:
                 printf("(1). confirm\n");
                 printf("(2). back\n");
                 printf("\nEnter your choice: ");
@@ -256,6 +285,9 @@ void modify_reservation(int passengerID){
                 case 2:
                     printf("\n***NO changes occurred***\n");
                     goto all;
+                     default :
+                            printf("Invalid Choise !!!\n");
+                            goto Invalid4;
                 }
 
 
@@ -289,7 +321,6 @@ void modify_reservation(int passengerID){
     }
     if(!flag){
                 printf("\nReservation not exist!\n\n");
-
                 passenger_Settings();
             }
 
@@ -310,12 +341,12 @@ void Show_Reservation_Log(void){
     if(flag != -1){
     printf("\nYour Flight Schedules:\n");
     printf("-----------------------------------------------------------------------------------------------------------------\n");
-    printf("%-20s%-20s%-20s%-15s\n","flight number", "passenger ID", "passenger Name", "Flight Date");
+    printf("%-20s%-20s%-20s%-20s\n","flight number", "passenger ID",  "passenger Name", "Flight Date");
     printf("-----------------------------------------------------------------------------------------------------------------\n");
    for (int j = flag; j < flightsExist; j++) {
-        printf("%-20d%-20lld%-20s%-15s\n",
+        printf("%-20d%-20d%-20s%-20s\n",
                trip[j].flightNumber,tkt[j].passengerID,
-                pasngr[j].Name,
+               pasngr[j].Name,
                trip[j].flightDate);
     }
 
@@ -329,6 +360,7 @@ void Show_Reservation_Log(void){
 
 
      passenger_Settings() ;
+
 }
 
 /////////////////////////
@@ -349,7 +381,7 @@ int reservationcancel()
                 tkt[j] = tkt[j+1];
             printf("the number cancelled successfully");
             TicketExist--;
-
+            Invalid :
             printf("\n(1) to Passenger Setting\n");
             printf("(2) to Quit           \n");
             scanf("%i",&choice);
@@ -362,13 +394,18 @@ int reservationcancel()
                     case 2 :
                         return(0);
                         break;
+                     default :
+                            printf("Invalid Choise !!!\n");
+                            goto Invalid;
                 }
 
         }
         }
         else
         {
-            printf("\n(1) to Admin Setting\n");
+            printf("the number reservation not found\n\n");
+            Invalid1:
+            printf("\n(1) to Try again\n");
             printf("(2) to Quit           \n");
             scanf("%i",&choice);
 
@@ -379,8 +416,12 @@ int reservationcancel()
                         break;
                     case 2 :
                         return(0);
+                        break;
+                       default :
+                            printf("Invalid Choise !!!\n");
+                            goto Invalid1;
                 }
-            printf("the number reservation not found");
+
         }
 
 
