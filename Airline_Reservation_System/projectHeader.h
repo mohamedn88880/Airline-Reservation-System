@@ -1,5 +1,4 @@
 
-
 #define MAX_FLIGHTS 100
 #define MAX_PASSENGERS 100
 
@@ -11,12 +10,12 @@ struct flight{
     char departureTime[20]; // HH:MM
     char departureCity[50];
     char arrivalTime[20]; // HH:MM
-    char arrivalCity[20];
+    char arrivalCity[50];
 
 };
 
 struct passenger{
-    long long int ID;
+    int ID;
     char Name[20];
     char Address[100];
     long long phoneNumber;
@@ -47,11 +46,12 @@ void admin_Settings(void);
 void passenger_Settings(void);
 int loginSignup(void);
 void New_Flight_Schedule(void);
-void New_Passenger_Resservation(void);
-void modify_reservation(void);
+void New_Passenger_Resservation(int passengerID);
+void modify_reservation(int passengerID);
 void update_flight(int flight_num);
 void display_Flights();
-void Show_Reservation_Log();
-void deleteFlight();
-void Search_Available_Flights ();
+void Show_Reservation_Log(void);
+int deleteFlight();
 int reservationcancel();
+void Search_Available_Flights ();
+void Show_Reservation_Log(void);
