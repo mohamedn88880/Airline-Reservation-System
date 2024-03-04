@@ -43,6 +43,7 @@ int main()
     case 3:
         printf("Exiting Program...");
         return 0;
+        break;
     default:
         printf("Invalid Input!");
         goto invalid;
