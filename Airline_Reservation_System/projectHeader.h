@@ -1,4 +1,3 @@
-
 #define MAX_FLIGHTS 100
 #define MAX_PASSENGERS 100
 
@@ -24,7 +23,7 @@ struct passenger{
 
 struct ticket{
     int number;
-    long long int passengerID;
+    int passengerID;
     int flightNumber;
     char resDate[20]; // DD/MM/YYYY
 
@@ -55,3 +54,5 @@ int deleteFlight();
 int reservationcancel();
 void Search_Available_Flights ();
 void Show_Reservation_Log(void);
+
+
