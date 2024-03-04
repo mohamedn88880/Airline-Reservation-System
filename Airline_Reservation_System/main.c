@@ -54,15 +54,14 @@ int main()
 
 //////////////////////////////////////////////////////////Functions' Code
 void admin_Settings(void){
-
     unsigned int choice;
     unsigned int flight_num;//number of flight which will add or update or delete (mahmoud);
 
     printf("1. Add new flight\n");
     printf("2. Delete existing flight schedule\n");
     printf("3. Update existing flight schedule\n");
-    printf("4. Display all flights\n");
-    printf("5. Main Menu\n");
+    printf("4. Main Menu\n");
+    printf("5. Display all flights\n");
 
     invalid:
     printf("\n");
@@ -82,11 +81,10 @@ void admin_Settings(void){
         update_flight(flight_num);
         break;
     case 4:
-        display_Flights();
-        break;
-        case 5:
         main();
         break;
+    case 5 :
+        display_Flights();
     default:
         printf("Invalid Input!");
         goto invalid;
@@ -97,7 +95,6 @@ void admin_Settings(void){
 void passenger_Settings(void){
     unsigned int choice;
     int passengerID = 0;
-
     bool loggedin = false; // true for testing //////////////////////////////////////////////////////////////
     begin:
     printf("You're ");
@@ -119,7 +116,7 @@ void passenger_Settings(void){
         printf("Invalid Input!");
         scanf("%*[^\n]");
         goto invalid;
-    } else if (!loggedin && choice != 1 && choice != 7 &&choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice !=6  ){
+    } else if (!loggedin && choice != 1 && choice != 7 && choice != 8){
         printf("Please login the system first!\n");
         goto invalid;
     }
@@ -136,16 +133,16 @@ void passenger_Settings(void){
         Search_Available_Flights ();
         break;
     case 3:
-        New_Passenger_Resservation();
+        New_Passenger_Resservation(passengerID);
         break;
     case 4:
          reservationcancel();
         break;
     case 5:
-        modify_reservation();
+        modify_reservation(passengerID);
         break;
     case 6:
-         Show_Reservation_Log();
+        Show_Reservation_Log();
         break;
 
         case 7:
@@ -155,9 +152,7 @@ void passenger_Settings(void){
     case 8:
         main();
         break;
-    default:
-        printf("Invalid Input!");
-        goto invalid;
+
     }
 
 }
