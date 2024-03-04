@@ -1,5 +1,4 @@
 
-
 #include <stdio.h>
 #include <string.h>
 #include "projectHeader.h"
@@ -202,7 +201,7 @@ void New_Flight_Schedule(void)
          invalid1 :
          printf("Enter The Number of Seats:");
          if (scanf("%i", &trip[flightsExist].availableSeats)!= 1){
-             printf("Invalid Input!");
+             printf("Invalid Input\n!");
              scanf("%*[^\n]");
              goto invalid1;
          }
@@ -223,13 +222,15 @@ void New_Flight_Schedule(void)
          printf("Enter The Arrival_Time:");
          gets(trip[flightsExist].arrivalTime);
 
-          printf("Enter (1) To Save The Informatiom\n");
-                    printf("Enter (0) To change \n");
+          printf("1. Save The Informatiom\n");
+          printf("2. To change \n");
+                    printf("Enter your choice: ");
                     scanf("%i",&choice1);
                     switch(choice1)
                     {
-                          case 0 :
+                          case 2 :
                               New_Flight_Schedule();
+                              break;
                           case 1 :
                                 printf("\n...You Add New Flight Schedule Successfully...\n");
                                 flightsExist++;
@@ -237,21 +238,25 @@ void New_Flight_Schedule(void)
                     }
          printf("\n(1) To Go To Admin Setting\n");
          printf("(2) To Quit                 \n");
+         printf("Enter your choice: ");
          scanf("%i",&choice);
          switch(choice)
          {
                case 1 :
                   admin_Settings();
                case 2 :
-                   return (0)   ;
+                   return (0);
+                   break;
          }
     }
     else
     {
         int choice=0;
-        printf("\nSorry, You can't Add Anew_Flight. The System Is Full !!!\n");
+        printf("\nSorry, You can't add a new_Flight. The System Is Full !!!\n");
+        Invalid:
         printf("\n(1) to Admin Setting\n");
         printf("(2) to Quit           \n");
+        printf("Enter your choice: ");
         scanf("%i",&choice);
         switch(choice)
         {
@@ -260,14 +265,17 @@ void New_Flight_Schedule(void)
                  break;
             case 2 :
                 return(0);
+                break;
+            default:
+            printf("Invalid Input!");
+            goto invalid;
         }
 
     }
 }
 ////////////////////////////////////////////////////////////////////// Search Available Flights
-////////////////////////////////////////////////////////////////////// Search Available Flights
 
-void Search_Available_Flights () {
+void Search_Available_Flights (int passengerID) {
 
         char DepartureCity[50], ArrivalCity[50], FlightDate[20] ;
         fflush(stdin);
@@ -276,6 +284,7 @@ void Search_Available_Flights () {
      gets(DepartureCity) ;
 
      printf("Enter The Arrival city: ");
+     fflush(stdin);
      gets(ArrivalCity) ;
 
      printf("Enter The Flight Date: ");
@@ -289,9 +298,9 @@ void Search_Available_Flights () {
         if(strcmp(trip[i].departureCity , DepartureCity) ==0 && strcmp(trip[i].arrivalCity, ArrivalCity)==0 &&
             strcmp(trip[i].flightDate , FlightDate)==0){
             flag ++ ;
-            printf("Available") ;
+            printf("\n\n*****Available*****\n\n") ;
             printf("\nDeparture time: %s", trip[i].departureTime);
-            printf("\nArrival time: %s\n", trip[i].arrivalTime);
+            printf("\nArrival time: %s\n\n", trip[i].arrivalTime);
 
         }
 
@@ -299,27 +308,25 @@ void Search_Available_Flights () {
 
        if(flag != 0){
 
-            printf("1. Add new reservation\n");
-            printf("2. Search for other flight\n");
-            printf("3. back\n");
+
+            printf("1. Search for other flight\n");
+            printf("2. back\n");
             printf("\nEnter your choice: ");
 
             scanf("%d", &choice);
 
             switch (choice){
-            case 1 :
-                New_Passenger_Resservation() ;
 
-            case 2 :
+            case 1 :
                 goto all ;
 
-            case 3 :
+            case 2 :
                 passenger_Settings() ;
             }
        }
 
         else {
-            printf("Unavailable\n") ;
+            printf("\n\nUnavailable\n\n") ;
             printf("1. Search for other flight\n");
             printf("2. back\n");
             printf("\nEnter your choice: ");
@@ -332,12 +339,11 @@ void Search_Available_Flights () {
 
             case 2 :
                 passenger_Settings() ;
+
             }
         }
 
 }
-
-
 
 
 //////////////display flights
@@ -358,6 +364,7 @@ void display_Flights() {
     printf("--------------------------------------------------------------------------------------------------\n\n\n");
     printf("1. admin settings\n");
     printf("2. passenger settings\n");
+    printf("Enter your choice: ");
     scanf("%d",&miny);
     switch(miny){
 case 1:
@@ -369,36 +376,51 @@ case 2:
 
 }
 /////////////////////////////
-void deleteFlight(){
-        if (flightsExist > 0) {
-        int flightNumber;
-        int m='!';
-        printf("Enter the flight number to delete: ");
-        scanf("%d", &flightNumber);
+int deleteFlight(){
+        unsigned int choice;
+        int flightID;
+        reenter:
+        printf ("please enter the flight\nNumber you want to delete: ");
+                scanf("%d",&flightID);
 
-        int index = -1;
-        for (int i = 0; i < flightsExist; i++) {
-            if (trip[i].flightNumber == flightNumber) {
-                index = i;
-                break;
-            }
-        }
+               for (int i=0;i<flightsExist;i++){
+                if(trip[i].flightNumber==flightID){
+                     trip[i] = trip[i+1];
 
-        if (index != -1) {
+                    printf("Flight schedule %d delete successfully.\n",flightID);
+                    flightsExist--;
+                    printf("\n1. to Admin Setting\n");
+                    printf("2. to Quit           \n");
+                    printf("Enter your choice: ");
+                    scanf("%i",&choice);
 
-            for (int j = index; j < flightsExist - 1; j++) {
-                trip[j] = trip[j + 1];
+                    switch(choice)
+                    {
+                        case 1 :
+                        admin_Settings();
+                             break;
+                        case 2 :
+                            return(0);
+                    }
 
-            }
+                }
+                else{
+                    printf("\n(1) to Admin Setting\n");
+                    printf("(2) to Quit           \n");
+                    scanf("%i",&choice);
 
-            printf("Flight schedule deleted successfully.\n");
-            admin_Settings();
-        } else {
-            printf("Flight number not found. No flight deleted.\n");
-            admin_Settings();
-        }
-    } else {
-        printf("No flights to delete.\n");
-        admin_Settings();
-    }
+                    switch(choice)
+                    {
+                        case 1 :
+                            goto reenter;
+                             break;
+                        case 2 :
+                            return(0);
+                    }
+                    printf("Flight %s not found.\n",flightID);
+
+     }
+
+
+}
 }
